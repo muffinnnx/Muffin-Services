@@ -1,0 +1,58 @@
+:root {
+  /* Backgrounds */
+  --bg-primary: #090711;
+  --bg-secondary: #0d0a17;
+  --bg-card: #12101f;
+  --bg-elevated: #171329;
+
+  /* Brand */
+  --purple: #8b2cff;
+  --purple-bright: #a855f7;
+  --magenta: #d52cff;
+  --blue: #3b82f6;
+
+  /* Text */
+  --text-primary: #f5f3ff;
+  --text-secondary: #9c96aa;
+  --text-muted: #686276;
+
+  /* Borders */
+  --border-subtle: rgba(139, 44, 255, 0.16);
+  --border-default: rgba(139, 44, 255, 0.22);
+  --border-strong: rgba(139, 44, 255, 0.38);
+
+  /* Effects */
+  --glow-purple: rgba(139, 44, 255, 0.24);
+  --glow-magenta: rgba(213, 44, 255, 0.18);
+  --glow-blue: rgba(59, 130, 246, 0.16);
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(
+    110deg,
+    var(--purple),
+    var(--magenta),
+    var(--blue)
+  );
+
+  --gradient-purple: linear-gradient(
+    135deg,
+    var(--purple),
+    var(--magenta)
+  );
+
+  /* Layout */
+  --container-width: 1280px;
+  --section-padding: 120px;
+
+  /* Radius */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  /* Animation */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-fast: 180ms var(--ease-premium);
+  --transition-normal: 350ms var(--ease-premium);
+  --transition-slow: 600ms var(--ease-premium);
+}

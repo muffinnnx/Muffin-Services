@@ -1,0 +1,980 @@
+/* =========================================================
+   MUFFIN SERVICES — SERVICES SECTION
+   Layered Stack → Hover Fan → Expanded Details
+   ========================================================= */
+
+.services {
+  position: relative;
+  width: 100%;
+  min-height: 900px;
+  padding: 130px 24px 110px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(139, 44, 255, 0.075),
+      transparent 32%
+    ),
+    #090711;
+}
+
+/* =========================================================
+   BACKGROUND
+   ========================================================= */
+
+.services__background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.55;
+
+  background-image:
+    linear-gradient(
+      rgba(139, 44, 255, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(139, 44, 255, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 48px 48px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
+}
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.services__container {
+  position: relative;
+  z-index: 2;
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.services__heading {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.services__eyebrow {
+  display: inline-block;
+  margin-bottom: 20px;
+
+  color: #a855f7;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.services__heading h2 {
+  margin: 0;
+
+  color: #f5f3ff;
+
+  font-size: clamp(56px, 7vw, 88px);
+  line-height: 0.95;
+  font-weight: 850;
+  letter-spacing: -0.065em;
+}
+
+.services__heading h2 span {
+  color: #c02cff;
+}
+
+.services__heading p {
+  max-width: 680px;
+  margin: 28px auto 0;
+
+  color: #9c96aa;
+
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   EXPERIENCE AREA
+   ========================================================= */
+
+.services__experience {
+  position: relative;
+
+  width: 100%;
+  min-height: 570px;
+
+  margin-top: 60px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.services__experience--expanded {
+  min-height: 500px;
+}
+
+/* =========================================================
+   STACK VIEW
+   ========================================================= */
+
+.services__stack-view {
+  position: relative;
+
+  width: 100%;
+  height: 570px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  perspective: 1400px;
+}
+
+/* =========================================================
+   CARD STACK
+   ========================================================= */
+
+.services__stack {
+  position: relative;
+
+  width: 760px;
+  height: 500px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  perspective: 1400px;
+}
+
+/* =========================================================
+   SERVICE CARD
+   ========================================================= */
+
+.service-card {
+  position: absolute;
+
+  width: 330px;
+  height: 390px;
+
+  padding: 30px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(139, 44, 255, 0.24);
+  border-radius: 22px;
+
+  background:
+    radial-gradient(
+      circle at 85% 0%,
+      rgba(168, 85, 247, 0.12),
+      transparent 38%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(25, 20, 42, 0.98),
+      rgba(12, 10, 23, 0.99)
+    );
+
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+
+  transform-origin: center center;
+
+  will-change: transform;
+
+  cursor: default;
+}
+
+/* Active card */
+
+.service-card--active {
+  cursor: default;
+}
+
+/* Background cards */
+
+.service-card--stacked {
+  pointer-events: none;
+}
+
+/* =========================================================
+   CARD SHINE
+   ========================================================= */
+
+.service-card__shine {
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  top: -150px;
+  right: -90px;
+
+  border-radius: 50%;
+
+  background: rgba(168, 85, 247, 0.13);
+
+  filter: blur(55px);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CARD TOP
+   ========================================================= */
+
+.service-card__top {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.service-card__top > span {
+  color: #a855f7;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.service-card__icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: 12px;
+
+  color: #b875ff;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(168, 85, 247, 0.14),
+      rgba(139, 44, 255, 0.04)
+    );
+
+  box-shadow:
+    inset 0 0 18px rgba(168, 85, 247, 0.04);
+}
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.service-card__content {
+  position: absolute;
+
+  left: 30px;
+  right: 30px;
+  top: 145px;
+}
+
+.service-card__category {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: #a855f7;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.service-card__content h3 {
+  margin: 0;
+
+  color: #f5f3ff;
+
+  font-size: 26px;
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.service-card__content p {
+  margin: 14px 0 0;
+
+  color: #8f899e;
+
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   CARD BOTTOM
+   ========================================================= */
+
+.service-card__bottom {
+  position: absolute;
+
+  left: 30px;
+  right: 30px;
+  bottom: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.service-card__bottom > span {
+  color: #a855f7;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.service-card__arrow {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  border-radius: 11px;
+
+  color: #d8c6ff;
+
+  background: rgba(168, 85, 247, 0.055);
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.service-card__arrow:hover {
+  transform: translate(2px, -2px);
+
+  border-color: rgba(168, 85, 247, 0.65);
+
+  color: #ffffff;
+
+  background: rgba(168, 85, 247, 0.18);
+
+  box-shadow:
+    0 0 25px rgba(139, 44, 255, 0.18);
+}
+
+/* =========================================================
+   STACK NAVIGATION
+   ========================================================= */
+
+.services__stack-navigation {
+  position: absolute;
+
+  left: 50%;
+  bottom: 0;
+
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  z-index: 100;
+}
+
+/* =========================================================
+   NAV BUTTONS
+   ========================================================= */
+
+.services__nav-button {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(139, 44, 255, 0.25);
+  border-radius: 10px;
+
+  color: #a89fb9;
+
+  background: rgba(16, 13, 28, 0.75);
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    background 180ms ease;
+}
+
+.services__nav-button:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(168, 85, 247, 0.6);
+
+  color: #ffffff;
+
+  background: rgba(139, 44, 255, 0.12);
+}
+
+/* =========================================================
+   INDICATOR
+   ========================================================= */
+
+.services__indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: #7d748d;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.services__indicator-line {
+  width: 28px;
+  height: 1px;
+
+  background: rgba(139, 44, 255, 0.35);
+}
+
+/* =========================================================
+   BOTTOM STATEMENT
+   ========================================================= */
+
+.services__statement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  margin-top: -5px;
+}
+
+.services__statement span {
+  width: 38px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(168, 85, 247, 0.65)
+    );
+}
+
+.services__statement span:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(168, 85, 247, 0.65),
+      transparent
+    );
+}
+
+.services__statement p {
+  margin: 0;
+
+  color: #756d83;
+
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+/* =========================================================
+   EXPANDED DETAIL CARD
+   ========================================================= */
+
+.service-detail {
+  position: relative;
+
+  width: min(920px, 100%);
+  min-height: 410px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(23, 18, 39, 0.98),
+      rgba(12, 10, 22, 0.99)
+    );
+
+  box-shadow:
+    0 45px 120px rgba(0, 0, 0, 0.58),
+    0 0 70px rgba(139, 44, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045);
+
+  isolation: isolate;
+}
+
+.service-detail__glow {
+  position: absolute;
+
+  width: 420px;
+  height: 300px;
+
+  right: -100px;
+  top: -150px;
+
+  border-radius: 50%;
+
+  background: rgba(168, 85, 247, 0.11);
+
+  filter: blur(75px);
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+/* =========================================================
+   DETAIL LEFT
+   ========================================================= */
+
+.service-detail__main {
+  position: relative;
+
+  padding: 34px 36px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.service-detail__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.service-detail__top > span {
+  color: #a855f7;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.service-detail__icon {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 14px;
+
+  color: #c084fc;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(168, 85, 247, 0.14),
+      rgba(139, 44, 255, 0.04)
+    );
+
+  box-shadow:
+    0 0 30px rgba(139, 44, 255, 0.08);
+}
+
+/* =========================================================
+   DETAIL HEADING
+   ========================================================= */
+
+.service-detail__heading {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.service-detail__heading > span {
+  display: block;
+
+  margin-bottom: 13px;
+
+  color: #a855f7;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.service-detail__heading h3 {
+  max-width: 430px;
+
+  margin: 0;
+
+  color: #f7f5ff;
+
+  font-size: clamp(40px, 4vw, 58px);
+  line-height: 0.98;
+  font-weight: 850;
+  letter-spacing: -0.06em;
+}
+
+.service-detail__heading p {
+  max-width: 390px;
+
+  margin: 22px 0 0;
+
+  color: #9991a8;
+
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   DETAIL CONTROLS
+   ========================================================= */
+
+.service-detail__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 25px;
+}
+
+.service-detail__back,
+.service-detail__next {
+  height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0 15px;
+
+  border-radius: 11px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.service-detail__back {
+  border: 1px solid rgba(139, 44, 255, 0.22);
+
+  color: #9991a8;
+
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.service-detail__next {
+  border: 1px solid rgba(168, 85, 247, 0.5);
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8b2cff,
+      #b72cff
+    );
+
+  box-shadow:
+    0 10px 30px rgba(139, 44, 255, 0.2);
+}
+
+.service-detail__back:hover,
+.service-detail__next:hover {
+  transform: translateY(-2px);
+}
+
+.service-detail__back:hover {
+  border-color: rgba(168, 85, 247, 0.5);
+
+  color: #ffffff;
+
+  background: rgba(168, 85, 247, 0.06);
+}
+
+.service-detail__next:hover {
+  box-shadow:
+    0 15px 35px rgba(139, 44, 255, 0.3);
+}
+
+/* =========================================================
+   DETAIL RIGHT
+   ========================================================= */
+
+.service-detail__included {
+  position: relative;
+
+  padding: 42px 34px;
+
+  border-left: 1px solid rgba(139, 44, 255, 0.16);
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(168, 85, 247, 0.11),
+      transparent 50%
+    ),
+    rgba(139, 44, 255, 0.018);
+}
+
+.service-detail__included-label {
+  display: block;
+
+  margin-bottom: 24px;
+
+  color: #a855f7;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+/* =========================================================
+   INCLUDED LIST
+   ========================================================= */
+
+.service-detail__list {
+  border-top: 1px solid rgba(139, 44, 255, 0.13);
+}
+
+.service-detail__item {
+  min-height: 64px;
+
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  align-items: center;
+
+  border-bottom: 1px solid rgba(139, 44, 255, 0.13);
+}
+
+.service-detail__item > span {
+  color: #a855f7;
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.service-detail__item p {
+  margin: 0;
+
+  color: #c9c2d5;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   HOVER DEPTH
+   ========================================================= */
+
+.services__stack-view:hover .service-card--active {
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.52),
+    0 0 45px rgba(139, 44, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.services__stack-view:hover .service-card--stacked {
+  border-color: rgba(139, 44, 255, 0.16);
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .services {
+    padding-top: 100px;
+  }
+
+  .services__stack {
+    width: 650px;
+  }
+
+  .service-card {
+    width: 310px;
+    height: 370px;
+  }
+
+  .service-detail {
+    width: min(720px, 100%);
+  }
+
+  .service-detail__heading h3 {
+    font-size: 42px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .services {
+    min-height: 850px;
+    padding: 100px 16px 80px;
+  }
+
+  .services__heading h2 {
+    font-size: 58px;
+  }
+
+  .services__heading p {
+    font-size: 13px;
+  }
+
+  .services__experience {
+    min-height: 520px;
+    margin-top: 35px;
+  }
+
+  .services__stack-view {
+    height: 520px;
+  }
+
+  .services__stack {
+    width: 100%;
+    height: 440px;
+  }
+
+  .service-card {
+    width: min(300px, 82vw);
+    height: 360px;
+
+    padding: 26px;
+  }
+
+  /*
+   * On smaller screens we keep the fan
+   * tighter so cards remain visible.
+   */
+
+  .service-card__content {
+    left: 26px;
+    right: 26px;
+    top: 135px;
+  }
+
+  .service-card__bottom {
+    left: 26px;
+    right: 26px;
+    bottom: 25px;
+  }
+
+  .service-detail {
+    grid-template-columns: 1fr;
+
+    min-height: auto;
+  }
+
+  .service-detail__main {
+    min-height: 410px;
+
+    padding: 28px;
+  }
+
+  .service-detail__included {
+    padding: 30px 28px;
+
+    border-left: 0;
+    border-top: 1px solid rgba(139, 44, 255, 0.16);
+  }
+
+  .service-detail__heading h3 {
+    font-size: 42px;
+  }
+
+  .services__stack-navigation {
+    bottom: -5px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 430px) {
+  .services__heading h2 {
+    font-size: 48px;
+  }
+
+  .service-card {
+    width: 285px;
+    height: 345px;
+  }
+
+  .service-card__content h3 {
+    font-size: 23px;
+  }
+
+  .service-detail__heading h3 {
+    font-size: 36px;
+  }
+
+  .service-detail__controls {
+    gap: 10px;
+  }
+
+  .service-detail__back,
+  .service-detail__next {
+    padding: 0 11px;
+    font-size: 10px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .service-card__arrow,
+  .services__nav-button,
+  .service-detail__back,
+  .service-detail__next {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,334 @@
+/* =========================================================
+   PRICING COMPARISON
+   ========================================================= */
+
+.comparison {
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 130px;
+  background:
+    linear-gradient(
+      180deg,
+      #090711 0%,
+      #0b0913 50%,
+      #090711 100%
+    );
+}
+
+.comparison__background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(139, 44, 255, 0.07),
+      transparent 42%
+    );
+}
+
+.comparison__container {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.comparison__heading {
+  max-width: 700px;
+  margin: 0 auto 65px;
+  text-align: center;
+}
+
+.comparison__eyebrow {
+  display: inline-flex;
+  margin-bottom: 17px;
+  color: #a855f7;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+}
+
+.comparison__heading h2 {
+  margin: 0;
+  color: #f5f3ff;
+  font-size: clamp(40px, 5.5vw, 62px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.comparison__heading h2 span {
+  color: #a855f7;
+}
+
+.comparison__heading p {
+  max-width: 610px;
+  margin: 22px auto 0;
+  color: #918b9c;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* =========================================================
+   TABLE WRAPPER
+   ========================================================= */
+
+.comparison__table-wrapper {
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.015);
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.35) transparent;
+}
+
+.comparison__table {
+  min-width: 900px;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.comparison__header {
+  display: grid;
+  grid-template-columns: 1.45fr repeat(4, 1fr);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.comparison__feature-heading {
+  display: flex;
+  align-items: flex-end;
+  padding: 30px 25px;
+}
+
+.comparison__feature-heading span {
+  color: #625d70;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.comparison__plan {
+  position: relative;
+  display: flex;
+  min-height: 145px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 25px 15px;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.comparison__plan:hover {
+  background: rgba(168, 85, 247, 0.035);
+}
+
+.comparison__plan--featured {
+  border-left-color: rgba(168, 85, 247, 0.18);
+  background: rgba(139, 44, 255, 0.055);
+}
+
+.comparison__plan--featured:hover {
+  background: rgba(139, 44, 255, 0.085);
+}
+
+.comparison__plan-name {
+  max-width: 130px;
+  color: #d9d4e3;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.comparison__plan strong {
+  color: #ffffff;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.comparison__popular {
+  position: absolute;
+  top: 12px;
+  padding: 5px 8px;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: 999px;
+  background: rgba(139, 44, 255, 0.1);
+  color: #c084fc;
+  font-size: 7px;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+}
+
+/* =========================================================
+   ROWS
+   ========================================================= */
+
+.comparison__row {
+  display: grid;
+  grid-template-columns: 1.45fr repeat(4, 1fr);
+  min-height: 67px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+  transition: background 0.25s ease;
+}
+
+.comparison__row:last-child {
+  border-bottom: none;
+}
+
+.comparison__row:hover {
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.comparison__feature {
+  display: flex;
+  align-items: center;
+  padding: 17px 25px;
+  color: #aaa4b5;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.comparison__value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.045);
+}
+
+.comparison__value--featured {
+  background: rgba(139, 44, 255, 0.035);
+  border-left-color: rgba(168, 85, 247, 0.12);
+}
+
+/* =========================================================
+   CHECK / MINUS
+   ========================================================= */
+
+.comparison__check,
+.comparison__minus {
+  display: inline-flex;
+  width: 27px;
+  height: 27px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.comparison__check {
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  background: rgba(168, 85, 247, 0.1);
+  color: #b76cff;
+  box-shadow: 0 0 18px rgba(139, 44, 255, 0.08);
+}
+
+.comparison__minus {
+  color: #4d4858;
+}
+
+/* =========================================================
+   NOTE
+   ========================================================= */
+
+.comparison__note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 45px;
+}
+
+.comparison__note span {
+  width: 70px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(168, 85, 247, 0.22)
+  );
+}
+
+.comparison__note span:last-child {
+  background: linear-gradient(
+    90deg,
+    rgba(168, 85, 247, 0.22),
+    transparent
+  );
+}
+
+.comparison__note p {
+  margin: 0;
+  color: #6f6979;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .comparison {
+    padding: 100px 0 110px;
+  }
+
+  .comparison__container {
+    width: min(100% - 32px, 760px);
+  }
+
+  .comparison__heading {
+    margin-bottom: 50px;
+  }
+
+  .comparison__table-wrapper {
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .comparison {
+    padding: 85px 0 90px;
+  }
+
+  .comparison__heading h2 {
+    font-size: 40px;
+  }
+
+  .comparison__heading p {
+    font-size: 13px;
+  }
+
+  .comparison__note {
+    gap: 10px;
+  }
+
+  .comparison__note span {
+    width: 25px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .comparison__plan,
+  .comparison__row {
+    transition: none !important;
+  }
+}
