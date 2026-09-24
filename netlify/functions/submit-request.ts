@@ -19,6 +19,7 @@ type NetlifyEvent = {
 };
 
 let client: MongoClient | null = null;
+let clientPromise: Promise<MongoClient> | null = null;
 
 async function getMongoClient(): Promise<MongoClient> {
   const mongoUri = process.env.MONGODB_URI;
@@ -27,12 +28,28 @@ async function getMongoClient(): Promise<MongoClient> {
     throw new Error("MONGODB_URI environment variable is not configured.");
   }
 
-  if (!client) {
-    client = new MongoClient(mongoUri);
-    await client.connect();
+  if (client) {
+    return client;
   }
 
-  return client;
+  if (!clientPromise) {
+    const newClient = new MongoClient(mongoUri);
+
+    clientPromise = newClient
+      .connect()
+      .then(() => {
+        client = newClient;
+        return newClient;
+      })
+      .catch((error) => {
+        // Do not keep a failed MongoClient.
+        clientPromise = null;
+        client = null;
+        throw error;
+      });
+  }
+
+  return clientPromise;
 }
 
 export const handler = async (event: NetlifyEvent) => {
@@ -101,10 +118,10 @@ export const handler = async (event: NetlifyEvent) => {
     // Connect to MongoDB.
     const mongoClient = await getMongoClient();
 
-    // Database name.
+    // Database.
     const database = mongoClient.db("MuffinServices");
 
-    // Collection name.
+    // Collection.
     const requests = database.collection("requests");
 
     // Save the request.
