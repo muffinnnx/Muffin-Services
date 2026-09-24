@@ -18,20 +18,65 @@ import "./Contact.css";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (
-    event: FormEvent<HTMLFormElement>
-  ) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    setSubmitted(true);
+    if (submitting) return;
+
+    setSubmitting(true);
+    setError("");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const requestData = {
+      name: String(formData.get("name") ?? ""),
+      discordUsername: String(formData.get("discord") ?? ""),
+      service: String(formData.get("service") ?? ""),
+      specs: String(formData.get("specs") ?? ""),
+      issue: String(formData.get("message") ?? ""),
+    };
+
+    try {
+      const response = await fetch("/.netlify/functions/submit-request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      const result = (await response.json()) as {
+        success?: boolean;
+        message?: string;
+      };
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message || "Unable to submit your request."
+        );
+      }
+
+      setSubmitted(true);
+      form.reset();
+    } catch (submitError) {
+      console.error("Contact form submission error:", submitError);
+
+      setError(
+        submitError instanceof Error
+          ? submitError.message
+          : "Something went wrong. Please try again."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
-    <section
-      id="contact"
-      className="contact"
-    >
+    <section id="contact" className="contact">
       {/* =====================================================
           BACKGROUND
       ===================================================== */}
@@ -64,16 +109,11 @@ export default function Contact() {
           }}
           transition={{
             duration: 0.75,
-            ease: [
-              0.16,
-              1,
-              0.3,
-              1,
-            ],
+            ease: [0.16, 1, 0.3, 1],
           }}
         >
           <span className="contact__eyebrow">
-            LET'S WORK TOGETHER
+            LET&apos;S WORK TOGETHER
           </span>
 
           <h2 className="contact__title">
@@ -82,10 +122,9 @@ export default function Contact() {
           </h2>
 
           <p className="contact__description">
-            Tell us about your PC, the games you
-            play, and what you want to improve.
-            We'll help you find the right Muffin
-            Services package for your setup.
+            Tell us about your PC, the games you play, and what you want to
+            improve. We&apos;ll help you find the right Muffin Services
+            package for your setup.
           </p>
 
           {/* =================================================
@@ -99,13 +138,9 @@ export default function Contact() {
               </div>
 
               <div>
-                <strong>
-                  Hardware focused
-                </strong>
+                <strong>Hardware focused</strong>
 
-                <span>
-                  Tuned around your setup
-                </span>
+                <span>Tuned around your setup</span>
               </div>
             </div>
 
@@ -115,13 +150,9 @@ export default function Contact() {
               </div>
 
               <div>
-                <strong>
-                  Performance focused
-                </strong>
+                <strong>Performance focused</strong>
 
-                <span>
-                  Gaming-first configuration
-                </span>
+                <span>Gaming-first configuration</span>
               </div>
             </div>
 
@@ -131,13 +162,9 @@ export default function Contact() {
               </div>
 
               <div>
-                <strong>
-                  Straightforward process
-                </strong>
+                <strong>Straightforward process</strong>
 
-                <span>
-                  No unnecessary complexity
-                </span>
+                <span>No unnecessary complexity</span>
               </div>
             </div>
           </div>
@@ -163,13 +190,9 @@ export default function Contact() {
             </div>
 
             <div className="contact__discord-text">
-              <strong>
-                Join Muffin Community
-              </strong>
+              <strong>Join Muffin Community</strong>
 
-              <span>
-                Get support directly on Discord
-              </span>
+              <span>Get support directly on Discord</span>
             </div>
 
             <ArrowUpRight
@@ -200,12 +223,7 @@ export default function Contact() {
           transition={{
             duration: 0.8,
             delay: 0.1,
-            ease: [
-              0.16,
-              1,
-              0.3,
-              1,
-            ],
+            ease: [0.16, 1, 0.3, 1],
           }}
         >
           {!submitted ? (
@@ -220,9 +238,7 @@ export default function Contact() {
                     PERFORMANCE REQUEST
                   </span>
 
-                  <h3>
-                    Tell us about your setup.
-                  </h3>
+                  <h3>Tell us about your setup.</h3>
                 </div>
 
                 <div className="contact__status">
@@ -252,19 +268,19 @@ export default function Contact() {
                       name="name"
                       placeholder="Your name"
                       required
+                      disabled={submitting}
                     />
                   </label>
 
                   <label className="contact__field">
-                    <span>
-                      Discord Username
-                    </span>
+                    <span>Discord Username</span>
 
                     <input
                       type="text"
                       name="discord"
                       placeholder="username"
                       required
+                      disabled={submitting}
                     />
                   </label>
                 </div>
@@ -278,11 +294,9 @@ export default function Contact() {
                     name="service"
                     defaultValue=""
                     required
+                    disabled={submitting}
                   >
-                    <option
-                      value=""
-                      disabled
-                    >
+                    <option value="" disabled>
                       Select a service
                     </option>
 
@@ -319,32 +333,49 @@ export default function Contact() {
                 {/* PC Specs */}
 
                 <label className="contact__field">
-                  <span>
-                    PC / Laptop Specs
-                  </span>
+                  <span>PC / Laptop Specs</span>
 
                   <input
                     type="text"
                     name="specs"
                     placeholder="Example: Ryzen 5 5600H / RTX 3050 / 8GB RAM"
                     required
+                    disabled={submitting}
                   />
                 </label>
 
                 {/* Problem */}
 
                 <label className="contact__field">
-                  <span>
-                    What do you want to improve?
-                  </span>
+                  <span>What do you want to improve?</span>
 
                   <textarea
                     name="message"
                     rows={4}
                     placeholder="Tell us about your FPS, input delay, stutters, recording setup, or anything else..."
                     required
+                    disabled={submitting}
                   />
                 </label>
+
+                {/* Error */}
+
+                {error && (
+                  <div
+                    role="alert"
+                    style={{
+                      padding: "12px 14px",
+                      borderRadius: "10px",
+                      border: "1px solid rgba(255, 80, 120, 0.3)",
+                      background: "rgba(255, 60, 100, 0.08)",
+                      color: "#ff9ab2",
+                      fontSize: "13px",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {error}
+                  </div>
+                )}
 
                 {/* Submit */}
 
@@ -352,14 +383,15 @@ export default function Contact() {
                   type="submit"
                   className="contact__submit"
                   whileHover={{
-                    y: -2,
+                    y: submitting ? 0 : -2,
                   }}
                   whileTap={{
-                    scale: 0.985,
+                    scale: submitting ? 1 : 0.985,
                   }}
+                  disabled={submitting}
                 >
                   <span>
-                    Send Request
+                    {submitting ? "Sending..." : "Send Request"}
                   </span>
 
                   <Send size={17} />
@@ -367,9 +399,8 @@ export default function Contact() {
               </form>
 
               <p className="contact__form-note">
-                This form currently prepares your
-                request. For direct support and
-                service coordination, use Discord.
+                Your request is securely submitted for review. You can also
+                join Muffin Community on Discord for direct support.
               </p>
             </>
           ) : (
@@ -396,24 +427,19 @@ export default function Contact() {
               </div>
 
               <span className="contact__form-label">
-                REQUEST PREPARED
+                REQUEST RECEIVED
               </span>
 
-              <h3>
-                You're all set.
-              </h3>
+              <h3>You&apos;re all set.</h3>
 
               <p>
-                Your request has been prepared.
-                Join Muffin Community on Discord
-                so we can review your setup and
-                continue the process.
+                Your request has been successfully submitted. We&apos;ll
+                review your setup details and get back to you through the
+                information you provided.
               </p>
 
               <motion.a
-                href={
-                  siteConfig.discord.inviteUrl
-                }
+                href={siteConfig.discord.inviteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact__success-button"
